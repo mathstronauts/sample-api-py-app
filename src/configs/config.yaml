@@ -1,2 +1,2 @@
 app:
-  message: "Hello, World! "
+  message: Welcome to Mathstronauts sample FastAPI application!

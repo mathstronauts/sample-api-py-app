@@ -1,28 +1,28 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: sample-portal-py-ing
-  namespace: www
+  name: sample-api-py-ing
+  namespace: api
   annotations:
     kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/proxy-body-size: "0"
     nginx.ingress.kubernetes.io/use-regex: "true"
     nginx.ingress.kubernetes.io/affinity: "cookie"
     nginx.ingress.kubernetes.io/session-cookie-name: "route"
-    cert-manager.io/cluster-issuer: "letsencrypt-www-dev"
+    cert-manager.io/cluster-issuer: "letsencrypt-api-dev"
 spec:
   rules:
   - host: app.dev.mathstronautsportal.ca
     http:
       paths:
       - pathType: Prefix
-        path: "/sample-portal-py"
+        path: "/sample-api-py"
         backend:
           service:
-            name: sample-portal-py
+            name: sample-api-py
             port:
               number: 80
   tls:
   - hosts:
     - app.dev.mathstronautsportal.ca
-    secretName: letesncrypt-www-dev
+    secretName: letesncrypt-api-dev

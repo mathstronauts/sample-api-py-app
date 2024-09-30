@@ -10,7 +10,7 @@ WORKDIR /app
 RUN python -m pip install -r requirements.txt
 
 # Expose the port the app runs on
-EXPOSE 5000
+EXPOSE 8000
 
 # Run the application
-CMD ["python", "-u", "./src/app.py"]
+CMD ["uvicorn", "src.app:app", "--host=0.0.0.0"]

@@ -1,4 +1,4 @@
-# app-template-py-www
+# sample-api-py-app
 This app supports deployments to both development and production environments using a Kubernetes cluster. Follow these steps to successfully deploy the app.
 
 ## pre-requisites
@@ -19,7 +19,7 @@ It accepts the following arguments:
 ```bash deployScript.sh <version> <env> <build_image(true | false)>```
 * example deploying to development without building a new Docker image:
  ```bash deployScript.sh 1.0.1 dev false``` 
-* example deploying to production andbuilding a new Docker image:
+* example deploying to production and building a new Docker image:
  ```bash deployScript.sh 1.0.1 prod true``` 
 
 
