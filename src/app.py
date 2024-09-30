@@ -1,6 +1,6 @@
-from dash import Dash, html
-import os
+from fastapi import FastAPI, APIRouter
 import yaml
+import os
 
 current_directory = os.path.dirname(os.path.abspath(__file__))
 
@@ -9,9 +9,19 @@ config_file = current_directory + "/configs/config.yaml"
 with open(config_file, 'r') as file:
     configs = yaml.safe_load(file)
 
-app = Dash(__name__,url_base_pathname="/sample-portal-py/")
+app = FastAPI()
+prefix_router = APIRouter(prefix='/sample-api-py')
 
-app.layout = html.Div(children=[html.P(configs['app']['message'])])
+@prefix_router.get("/")
+def read_root():
+    return {"message": f"{configs['app']['message']}"}
 
-if __name__ == '__main__':
-    app.run(debug=True, host="0.0.0.0", port=5000)
+@prefix_router.get("/items/{item_id}")
+def read_item(item_id: int, q: str = None):
+    return {"item_id": item_id, "q": q}
+
+@prefix_router.get("/items/")
+def create_item(item: dict):
+    return {"item": item}
+
+app.include_router(prefix_router)

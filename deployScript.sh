@@ -77,6 +77,7 @@ fi
 
 # Step 5: Update Kubernetes Deployment YAML with new version
 echo "Updating Kubernetes deployment..."
+echo "Image: mathstronautslearn/$APP_NAME:$VERSION"
 sed -i "s#image:.*#image: mathstronautslearn/$APP_NAME:$VERSION#g" automation/kubernetes/base/deployment.yaml
 
 
