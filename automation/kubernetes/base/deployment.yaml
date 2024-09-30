@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sample-portal-py
+  namespace: www
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sample-portal-py
+  template:
+    metadata:
+      labels:
+        app: sample-portal-py
+    spec:
+      containers:
+      - name: sample-portal-py
+        image: mathstronautslearn/sample-portal-py:1.0.3
+        imagePullPolicy: Always
+        volumeMounts:
+        - name: sample-portal-py-config
+          mountPath: /app/src/configs/config.yaml
+          subPath: config.yaml
+          readOnly: true
+        ports:
+        - containerPort: 5000
+      volumes:
+      - name: sample-portal-py-config
+        configMap:
+          name: sample-portal-py
